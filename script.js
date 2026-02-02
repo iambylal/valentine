@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Why are you doing this?",
         "You for real?",
         "Have a heart!",
-        "Don't be so cold!",
+        "Don't be so cold?",
         "Change of heart?",
         "Please?",
         "Pretty please?",
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveButton() {
         // Get viewport dimensions
-        const padding = 50; // Increased padding for safety
+        const padding = 20; // Reduced padding to make it easier to find a spot on mobile
         const maxX = window.innerWidth - noButton.offsetWidth - padding;
         const maxY = window.innerHeight - noButton.offsetHeight - padding;
 
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Apply new position
         noButton.style.position = 'fixed'; // Ensure it can move anywhere
+        noButton.style.zIndex = '9999'; // Ensure it stays on top!
         noButton.style.left = `${randomX}px`;
         noButton.style.top = `${randomY}px`;
 
@@ -81,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    // Create hearts periodically
-    setInterval(createHeart, 300);
+    // Create hearts periodically - FASTER!
+    setInterval(createHeart, 100);
 });
 
 function initCelebration() {
