@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Background Hearts & Flowers Rain Logic ---
     const bgEmojis = ['❤️', '🌹', '💖', '🌷', '🌸', '💝', '💕'];
+    console.log('Rain animation script loaded');
 
     function createRainingHeart() {
         const heart = document.createElement('div');
@@ -80,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         heart.style.fontSize = Math.random() * 15 + 15 + 'px';
         heart.style.opacity = Math.random() * 0.5 + 0.5;
         heart.style.color = '#ff4d6d';
+        heart.style.position = 'absolute'; // IMPORTANT: Ensure absolute positioning
+        heart.style.pointerEvents = 'none'; // Prevent blocking clicks
         body.appendChild(heart);
 
         // Animate falling
@@ -102,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Create raining hearts constantly
+    console.log('Starting rain interval...');
     setInterval(() => {
         createRainingHeart();
         createRainingHeart();
