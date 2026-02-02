@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Why are you doing this?",
         "You for real?",
         "Have a heart!",
-        "Don't be so cold!",
+        "Don't be so cold?",
         "Change of heart?",
         "Please?",
         "Pretty please?",
@@ -34,15 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveButton() {
         // Get viewport dimensions
-        const maxX = window.innerWidth - noButton.offsetWidth - 20; // 20px padding
-        const maxY = window.innerHeight - noButton.offsetHeight - 20;
+        const padding = 20; // Reduced padding to make it easier to find a spot on mobile
+        const maxX = window.innerWidth - noButton.offsetWidth - padding;
+        const maxY = window.innerHeight - noButton.offsetHeight - padding;
 
-        // Generate random coordinates
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
+        if (maxX < 0 || maxY < 0) {
+            // Viewport too small, just center it or keep it safe
+            return;
+        }
+
+        // Generate random coordinates within safe bounds
+        const randomX = Math.random() * maxX + (padding / 2);
+        const randomY = Math.random() * maxY + (padding / 2);
 
         // Apply new position
         noButton.style.position = 'fixed'; // Ensure it can move anywhere
+        noButton.style.zIndex = '9999'; // Ensure it stays on top!
         noButton.style.left = `${randomX}px`;
         noButton.style.top = `${randomY}px`;
 
@@ -61,56 +68,90 @@ document.addEventListener('DOMContentLoaded', () => {
         moveButton();
     });
 
-    // --- Background Hearts Logic ---
-    function createHeart() {
+    // --- Background Hearts & Flowers Rain Logic ---
+    const bgEmojis = ['❤️', '🌹', '💖', '🌷', '🌸', '💝', '💕'];
+
+    function createRainingHeart() {
         const heart = document.createElement('div');
         heart.classList.add('heart');
-        heart.innerHTML = '❤️';
+        heart.innerText = bgEmojis[Math.floor(Math.random() * bgEmojis.length)];
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heart.style.top = '-50px';
+        heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+        heart.style.opacity = Math.random() * 0.5 + 0.5;
+        heart.style.color = '#ff4d6d';
         body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }
-
-    // Create hearts periodically
-    setInterval(createHeart, 300);
-});
-
-function initCelebration() {
-    // Simple confetti effect for yes page
-    const colors = ['#ff4d6d', '#ff8fa3', '#fff0f3', '#ffccd5', '#590d22'];
-
-    function createConfetti() {
-        const confetti = document.createElement('div');
-        confetti.innerHTML = '🎉';
-        confetti.style.position = 'absolute';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.top = '-10px';
-        confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
-        confetti.style.opacity = Math.random();
-        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-        document.body.appendChild(confetti);
-
-        // Animate fall using JS or rely on CSS. Let's use simple JS animation for variety
-        let pos = -10;
-        const speed = Math.random() * 3 + 2;
-        const angle = Math.random() * 2 - 1; // drift left or right
+        // Animate falling
+        let pos = -50;
+        let rotation = Math.random() * 360;
+        const speed = Math.random() * 2 + 2;
+        const rotationSpeed = Math.random() * 4 - 2;
 
         const fall = setInterval(() => {
             pos += speed;
-            confetti.style.top = pos + 'px';
-            confetti.style.left = (parseFloat(confetti.style.left) + angle) + 'px';
+            rotation += rotationSpeed;
+            heart.style.top = pos + 'px';
+            heart.style.transform = `rotate(${rotation}deg)`;
 
             if (pos > window.innerHeight) {
                 clearInterval(fall);
-                confetti.remove();
+                heart.remove();
             }
         }, 20);
     }
 
-    setInterval(createConfetti, 100);
+    // Create raining hearts constantly
+    setInterval(() => {
+        createRainingHeart();
+        createRainingHeart();
+        createRainingHeart();
+    }, 100);
+});
+
+function initCelebration() {
+    // Hearts & Roses Rain for yes page!
+    const emojis = ['❤️', '🌹', '💖', '💕', '💝', '🌷'];
+
+    function createRainingEmoji() {
+        const emoji = document.createElement('div');
+        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.position = 'absolute';
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.top = '-50px';
+        emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
+        emoji.style.opacity = Math.random() * 0.6 + 0.4;
+        emoji.style.zIndex = '1000';
+        emoji.style.pointerEvents = 'none';
+
+        document.body.appendChild(emoji);
+
+        // Animate falling
+        let pos = -50;
+        let rotation = Math.random() * 360;
+        const speed = Math.random() * 2 + 2;
+        const rotationSpeed = Math.random() * 5 - 2;
+        const drift = Math.random() * 2 - 1;
+
+        const fall = setInterval(() => {
+            pos += speed;
+            rotation += rotationSpeed;
+            emoji.style.top = pos + 'px';
+            emoji.style.left = (parseFloat(emoji.style.left) + drift) + 'px';
+            emoji.style.transform = `rotate(${rotation}deg)`;
+
+            if (pos > window.innerHeight) {
+                clearInterval(fall);
+                emoji.remove();
+            }
+        }, 20);
+    }
+
+    // Heavy rain of hearts and roses
+    setInterval(() => {
+        createRainingEmoji();
+        createRainingEmoji();
+        createRainingEmoji();
+        createRainingEmoji();
+    }, 50);
 }
