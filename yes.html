@@ -142,7 +142,7 @@
             const emoji = document.createElement('div');
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             emoji.style.position = 'fixed';
-            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.left = (Math.random() * 100) + '%';
             emoji.style.top = '-50px';
             emoji.style.fontSize = (Math.random() * 20 + 20) + 'px';
             emoji.style.opacity = Math.random() * 0.6 + 0.4;
@@ -174,8 +174,7 @@
         setInterval(() => {
             createFalling();
             createFalling();
-            createFalling();
-        }, 80);
+        }, 150);
 
         console.log('Celebration page loaded! Hearts raining!');
     </script>

@@ -164,8 +164,7 @@
 <body>
     <div class="container">
         <div class="gif-container">
-            <img src="https://i.imgur.com/3NLymXu.gif" alt="Cute bear"
-                onerror="this.src='https://media4.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif'">
+            <img src="https://media.tenor.com/jIMGfUzEiGgAAAAi/bear.gif" alt="Cute bear">
         </div>
         <h1>Will you be my Valentine, Ritika? 💘</h1>
         <p>Please? 🥺</p>
@@ -183,7 +182,7 @@
             const emoji = document.createElement('div');
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             emoji.style.position = 'fixed';
-            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.left = (Math.random() * 100) + '%';
             emoji.style.top = '-50px';
             emoji.style.fontSize = (Math.random() * 15 + 15) + 'px';
             emoji.style.opacity = Math.random() * 0.5 + 0.5;
@@ -212,8 +211,7 @@
 
         setInterval(() => {
             createFalling();
-            createFalling();
-        }, 150);
+        }, 300);
 
         // No button logic
         const noButton = document.getElementById('no-btn');
