@@ -52,8 +52,48 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
+  width: 600px;
+  /* Increased for PC */
   max-width: 90%;
-  width: 400px;
+}
+
+/* ... (skipping intervening styles) ... */
+
+/* Floating Hearts/Flowers Background */
+.hearts-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  font-size: 24px;
+  /* Larger */
+  color: var(--primary-color);
+  opacity: 0.8;
+  top: -10vh;
+  /* Start above viewport */
+  user-select: none;
+  /* Prevent selecting hearts */
+  animation: rain 5s linear infinite;
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 h1 {
@@ -115,43 +155,7 @@ h1 {
   /* Starts relative, becomes absolute on movement */
 }
 
-/* Floating Hearts Background */
-.hearts-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.heart {
-  position: absolute;
-  font-size: 20px;
-  color: var(--primary-color);
-  opacity: 0.6;
-  user-select: none;
-  /* Prevent selecting hearts */
-  animation: float 15s infinite linear, pulse 2s infinite ease-in-out;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: translateY(-10vh) rotate(360deg);
-    opacity: 0;
-  }
-}
+/* Old animation removed */
 
 @keyframes pulse {
   0% {
