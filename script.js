@@ -82,35 +82,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    // Create hearts periodically - FASTER!
-    setInterval(createHeart, 100);
+    // Create hearts periodically - MUCH FASTER!
+    setInterval(createHeart, 50);
 });
 
 function initCelebration() {
-    // Simple confetti effect for yes page
-    const colors = ['#ff4d6d', '#ff8fa3', '#fff0f3', '#ffccd5', '#590d22'];
+    // Confetti effect for yes page - MORE EMOJIS!
+    const emojis = ['🎉', '🥳', '👏', '💘', '💝', '🌹', '✨', '💑', '💓', '🎀'];
 
     function createConfetti() {
         const confetti = document.createElement('div');
-        confetti.innerHTML = '🎉';
+        // Pick a random emoji
+        confetti.innerText = emojis[Math.floor(Math.random() * emojis.length)];
         confetti.style.position = 'absolute';
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.top = '-10px';
-        confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+        confetti.style.fontSize = Math.random() * 20 + 20 + 'px'; // Bigger emojis
         confetti.style.opacity = Math.random();
+        confetti.style.zIndex = '1000'; // Make sure they are visible
         confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
 
         document.body.appendChild(confetti);
 
-        // Animate fall using JS or rely on CSS. Let's use simple JS animation for variety
+        // Animate fall
         let pos = -10;
         const speed = Math.random() * 3 + 2;
         const angle = Math.random() * 2 - 1; // drift left or right
+        const spin = Math.random() * 5 - 2; // spin speed
+        let rotation = 0;
 
         const fall = setInterval(() => {
             pos += speed;
+            rotation += spin;
             confetti.style.top = pos + 'px';
             confetti.style.left = (parseFloat(confetti.style.left) + angle) + 'px';
+            confetti.style.transform = `rotate(${rotation}deg)`;
 
             if (pos > window.innerHeight) {
                 clearInterval(fall);
@@ -119,5 +125,5 @@ function initCelebration() {
         }, 20);
     }
 
-    setInterval(createConfetti, 100);
+    setInterval(createConfetti, 50); // Rain of emojis
 }
