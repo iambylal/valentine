@@ -4,29 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yay!</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Yay! 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Specific tweaks for yes.html */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fff0f3, #ffe3e8, #ffc2d1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #590d22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
         .container {
-            background-color: rgba(255, 230, 240, 0.9);
+            z-index: 10;
+            background: rgba(255, 230, 240, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 600px;
         }
 
         h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             color: #d63384;
+            animation: slideIn 1s ease-out;
         }
 
-        .credits {
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            color: #ccc;
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        .gif-container {
+            margin-bottom: 2rem;
+        }
+
+        .gif-container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .emojis {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 
-<body class="celebration">
-    <div class="hearts-bg"></div>
+<body>
     <div class="container">
         <div class="gif-container">
             <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Bears kissing">
@@ -34,8 +131,54 @@
         <h1>Yay! ❤️</h1>
         <p>I knew you would say yes! xd</p>
         <p>See you soon, Ritika!</p>
-        <p style="font-size: 2rem; margin-top: 10px;">🎉🥳💘🌹✨😻💑</p>
+        <p class="emojis">🎉🥳💘🌹✨😻💑</p>
     </div>
+
+    <script>
+        // Heavy rain of hearts and roses
+        const emojis = ['❤️', '🌹', '💖', '💕', '💝', '🌷'];
+
+        function createFalling() {
+            const emoji = document.createElement('div');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.position = 'fixed';
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = '-50px';
+            emoji.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            emoji.style.opacity = Math.random() * 0.6 + 0.4;
+            emoji.style.color = '#ff4d6d';
+            emoji.style.pointerEvents = 'none';
+            emoji.style.zIndex = '1000';
+            document.body.appendChild(emoji);
+
+            let pos = -50;
+            let rotation = Math.random() * 360;
+            const speed = Math.random() * 2 + 2;
+            const rotSpeed = Math.random() * 5 - 2;
+            const drift = Math.random() * 2 - 1;
+
+            const fall = setInterval(() => {
+                pos += speed;
+                rotation += rotSpeed;
+                emoji.style.top = pos + 'px';
+                emoji.style.left = (parseFloat(emoji.style.left) + drift) + 'px';
+                emoji.style.transform = `rotate(${rotation}deg)`;
+
+                if (pos > window.innerHeight) {
+                    clearInterval(fall);
+                    emoji.remove();
+                }
+            }, 20);
+        }
+
+        setInterval(() => {
+            createFalling();
+            createFalling();
+            createFalling();
+        }, 80);
+
+        console.log('Celebration page loaded! Hearts raining!');
+    </script>
 </body>
 
 </html>
