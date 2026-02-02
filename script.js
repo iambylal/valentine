@@ -104,13 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 20);
     }
 
-    // Create raining hearts constantly
+    // Create raining hearts constantly (OPTIMIZED)
     console.log('Starting rain interval...');
     setInterval(() => {
         createRainingHeart();
         createRainingHeart();
-        createRainingHeart();
-    }, 100);
+    }, 150); // Reduced frequency for better performance
 });
 
 function initCelebration() {
@@ -151,11 +150,10 @@ function initCelebration() {
         }, 20);
     }
 
-    // Heavy rain of hearts and roses
+    // Heavy rain of hearts and roses (OPTIMIZED)
     setInterval(() => {
         createRainingEmoji();
         createRainingEmoji();
         createRainingEmoji();
-        createRainingEmoji();
-    }, 50);
+    }, 80); // Reduced from 50ms for better performance
 }
