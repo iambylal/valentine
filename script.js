@@ -34,12 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveButton() {
         // Get viewport dimensions
-        const maxX = window.innerWidth - noButton.offsetWidth - 20; // 20px padding
-        const maxY = window.innerHeight - noButton.offsetHeight - 20;
+        const padding = 50; // Increased padding for safety
+        const maxX = window.innerWidth - noButton.offsetWidth - padding;
+        const maxY = window.innerHeight - noButton.offsetHeight - padding;
 
-        // Generate random coordinates
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
+        if (maxX < 0 || maxY < 0) {
+            // Viewport too small, just center it or keep it safe
+            return;
+        }
+
+        // Generate random coordinates within safe bounds
+        const randomX = Math.random() * maxX + (padding / 2);
+        const randomY = Math.random() * maxY + (padding / 2);
 
         // Apply new position
         noButton.style.position = 'fixed'; // Ensure it can move anywhere
